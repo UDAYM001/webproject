@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Section</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f2f5;
+    }
+
+    /* Title Bar */
+    .title-bar {
+      width: 100%;
+      background-color: #b3d9ff;
+      color: #222;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .title-bar h2 {
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .dropdown button {
+      background-color: transparent;
+      color: #222;
+      border: none;
+      font-size: 24px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #fff;
+      min-width: 160px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .dropdown-content a {
+      color: #333;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      font-size: 14px;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Profile Container */
+    .profile-container {
+      display: flex;
+      width: 95%;
+      margin: 40px auto;
+      min-height: 300px;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 20px;
+      background-color: #fff;
+      gap: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+
+    .profile-text {
+      flex: 1;
+      padding-right: 10px;
+    }
+
+    .profile-text h5 {
+      font-weight: 300;
+      color: #777;
+      margin-bottom: 10px;
+      font-size: 14px;
+      background-color: #8a8a8a11;
+      padding: 4px 8px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+
+    .profile-text h1 {
+      font-size: 36px;
+      margin-bottom: 12px;
+      margin-left: 22px;
+      color: #222;
+      font-weight: 600;
+    }
+
+    .profile-text h3 {
+      font-size: 30px;
+      margin-top: 30px;
+      margin-left: 22px;
+      color: #222;
+      font-weight: 600;
+    }
+
+    .profile-text h2 {
+      font-size: 25px;
+      margin-bottom: 12px;
+      margin-top: 20px;
+      margin-left: 22px;
+      color: #3f3f3fc2;
+      font-weight: 600;
+    }
+
+    /* Profile Info Grid */
+    .profile-info-grid {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 10px 30px;
+      margin-left: 22px;
+      margin-top: 10px;
+    }
+
+    .profile-info-grid .label {
+      font-size: 18px;
+      color: #333;
+      font-weight: 400;
+      align-self: center;
+      white-space: nowrap;
+    }
+
+    .profile-info-grid .value {
+      align-self: center;
+    }
+
+    .profile-info-grid .highlight {
+      background: #88888800;
+      color: #000000;
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-weight: 500;
+      font-size: 16px;
+      align-items: center;
+    }
+
+    .profile-image {
+      flex-shrink: 0;
+      width: 200px;
+      height: auto;
+    }
+
+    .profile-image img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    mark {
+      background-color: #ffffff00; 
+      color: #2e2e2e;           
+      font-weight: 600;
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-size: 14px;
+    }
+
+    /* Mobile Sticky Image */
+    .mobile-image-container {
+      display: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .profile-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: left;
+        padding-top: 100px;
+      }
+
+      .profile-text {
+        padding-right: 0;
+        width: 100%;
+      }
+
+      .profile-text h5 {
+        margin-left: 0;
+      }
+
+      .profile-text h1 {
+        margin-left: 0;
+        font-size: 28px;
+      }
+
+      .profile-text h2 {
+        margin-left: 0;
+        font-size: 20px;
+      }
+
+      .profile-text h3 {
+        margin-left: 0;
+        font-size: 24px;
+      }
+
+      .profile-info-grid {
+        margin-left: 0;
+        grid-template-columns: 140px 1fr;
+        gap: 8px 20px;
+      }
+
+      .profile-info-grid .label {
+        font-size: 16px;
+      }
+
+      .profile-info-grid .highlight {
+        font-size: 14px;
+      }
+
+      /* Hide desktop image */
+      .profile-image {
+        display: none;
+      }
+
+      /* Show mobile image */
+      .mobile-image-container {
+        display: block;
+        position: fixed;
+        top: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 50;
+        transition: all 0.3s ease;
+      }
+
+      .mobile-image-container img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        border: 4px solid #fff;
+        transition: all 0.3s ease;
+      }
+
+      /* Shrink image on scroll */
+      .mobile-image-container.shrink {
+        top: 65px;
+      }
+
+      .mobile-image-container.shrink img {
+        width: 70px;
+        height: 70px;
+        border: 3px solid #fff;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .profile-info-grid {
+        grid-template-columns: 120px 1fr;
+      }
+
+      .profile-info-grid .label {
+        font-size: 14px;
+      }
+
+      .profile-info-grid .highlight {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Title Bar -->
+  <div class="title-bar">
+    <h2>Provider One</h2>
+    <div class="dropdown">
+      <button>☰</button>
+      <div class="dropdown-content">
+        <a href="main.html">Credintal</a>
+        <a href="#">ERA</a>
+        <a href="#">EFT</a>
+        <a href="#">EDI</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Sticky Image (only visible on mobile) -->
+  <div class="mobile-image-container" id="mobileImage">
+    <img src="assets/image5.jpg" alt="Person">
+  </div>
+
+  <!-- Profile Section -->
+  <div class="profile-container">
+    <div class="profile-text">
+      <h5>Joined with us in 01 01 2020</h5>
+      <h1>Provider three</h1>
+      <div class="profile-info-grid">
+        <div class="label">NPI</div>
+        <div class="value highlight">1234567890</div>
+        <div class="label">PTAN</div>
+        <div class="value highlight">A12345</div>
+        <div class="label">TPI</div>
+        <div class="value highlight">TPI-98765</div>
+        <div class="label">RR PTAN</div>
+        <div class="value highlight">RR-54321</div>
+      </div>
+      <h2>MEDICAL CENTER OF EXCELLENCE<mark>(group)</mark></h2>
+      <div class="profile-info-grid">
+        <div class="label">GROUP NPI</div>
+        <div class="value highlight">1234567890</div>
+        <div class="label">GROUP PTAN</div>
+        <div class="value highlight">A12345</div>
+        <div class="label">GROUP TPI</div>
+        <div class="value highlight">TPI-98765</div>
+        <div class="label">GROUP RR PTAN</div>
+        <div class="value highlight">RR-54321</div>
+      </div>
+      <h3>TAX ID:- 789654123</h3>
+    </div>
+    <div class="profile-image">
+      <img src="assets/image5.jpg" alt="Person">
+    </div>
+  </div>
+
+  <script>
+    // Shrink mobile image on scroll
+    let lastScrollTop = 0;
+    const mobileImage = document.getElementById('mobileImage');
+    
+    window.addEventListener('scroll', function() {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      if (window.innerWidth <= 768) {
+        if (scrollTop > 50) {
+          mobileImage.classList.add('shrink');
+        } else {
+          mobileImage.classList.remove('shrink');
+        }
+      }
+    });
+
+    // Remove shrink class on window resize if desktop
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) {
+        mobileImage.classList.remove('shrink');
+      }
+    });
+  </script>
+
+</body>
+</html>
